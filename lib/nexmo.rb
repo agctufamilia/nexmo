@@ -26,7 +26,11 @@ module Nexmo
     attr_accessor :key, :secret, :http, :oauth_access_token
 
     def send_message(params)
-      post('/sms/json', params)
+      if params[:pin]
+        post('/sc/us/2fa/json', params)
+      else
+        post('/sms/json', params)
+      end
     end
 
     def send_message!(params)
